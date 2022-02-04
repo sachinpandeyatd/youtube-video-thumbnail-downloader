@@ -1,12 +1,13 @@
 <?php
     if(isset($_POST['download'])){
-        $imgUrl = $_POST['imgUrl'];
+        $imgUrl = $_POST['imgurl'];
         $ch = curl_init($imgUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $download = curl_exec($ch);
         curl_close($ch);
         header('Content-type: image/jpg');
         header('Content-Disposition: attachment; filename="thumbnail.jpg"');
+        echo $download;
     }
 ?>
     
@@ -21,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="" method="POST">
         <header>
             <h1>Youtube Thumbnail</h1>
         </header>
@@ -29,8 +30,8 @@
             <span class="title">Paste your Youtube URL here:</span>
             <div class="field">
                 <input type="text" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" required />
-                <input class="hidden-input" type="hidden" />
-                <div class="bottom-line" name="imgurl"></div>
+                <input class="hidden-input" type="hidden" name="imgurl"/>
+                <div class="bottom-line"></div>
             </div> 
         </div>
         <div class="preview-area">
